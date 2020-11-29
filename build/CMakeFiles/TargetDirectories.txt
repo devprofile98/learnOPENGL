@@ -1,0 +1,3 @@
+/home/sub/Documents/Projects/cpp/opengl/build/CMakeFiles/rebuild_cache.dir
+/home/sub/Documents/Projects/cpp/opengl/build/CMakeFiles/edit_cache.dir
+/home/sub/Documents/Projects/cpp/opengl/build/CMakeFiles/gl5.dir

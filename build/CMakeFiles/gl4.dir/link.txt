@@ -1,0 +1,1 @@
+/usr/bin/g++     CMakeFiles/gl4.dir/rotatingCube.cpp.o CMakeFiles/gl4.dir/src/glad.c.o CMakeFiles/gl4.dir/src/shader.cpp.o CMakeFiles/gl4.dir/src/texture.cpp.o  -o gl4   -L/home/sub/Documents/Projects/cpp/opengl/./src  -Wl,-rpath,/home/sub/Documents/Projects/cpp/opengl/./src ../glfw/glfw/build/src/libglfw3.a -ldl -lpthread 
