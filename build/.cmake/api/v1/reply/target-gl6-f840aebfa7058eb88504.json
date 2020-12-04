@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "gl5"
+			"path" : "gl6"
 		}
 	],
 	"backtrace" : 1,
@@ -108,7 +108,7 @@
 			]
 		}
 	],
-	"id" : "gl5::@6890427a1f51a3e7e1df",
+	"id" : "gl6::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -144,8 +144,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "gl5",
-	"nameOnDisk" : "gl5",
+	"name" : "gl6",
+	"nameOnDisk" : "gl6",
 	"paths" : 
 	{
 		"build" : ".",
@@ -170,7 +170,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "Application.cpp",
+			"path" : "Lighting.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

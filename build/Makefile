@@ -73,17 +73,6 @@ CMAKE_BINARY_DIR = /home/sub/Documents/Projects/cpp/opengl/build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -94,6 +83,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/local/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -128,44 +128,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named gl5
+# Target rules for targets named gl6
 
 # Build rule for target.
-gl5: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 gl5
-.PHONY : gl5
+gl6: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gl6
+.PHONY : gl6
 
 # fast build rule for target.
-gl5/fast:
-	$(MAKE) -f CMakeFiles/gl5.dir/build.make CMakeFiles/gl5.dir/build
-.PHONY : gl5/fast
+gl6/fast:
+	$(MAKE) -f CMakeFiles/gl6.dir/build.make CMakeFiles/gl6.dir/build
+.PHONY : gl6/fast
 
-Application.o: Application.cpp.o
+Lighting.o: Lighting.cpp.o
 
-.PHONY : Application.o
+.PHONY : Lighting.o
 
 # target to build an object file
-Application.cpp.o:
-	$(MAKE) -f CMakeFiles/gl5.dir/build.make CMakeFiles/gl5.dir/Application.cpp.o
-.PHONY : Application.cpp.o
+Lighting.cpp.o:
+	$(MAKE) -f CMakeFiles/gl6.dir/build.make CMakeFiles/gl6.dir/Lighting.cpp.o
+.PHONY : Lighting.cpp.o
 
-Application.i: Application.cpp.i
+Lighting.i: Lighting.cpp.i
 
-.PHONY : Application.i
+.PHONY : Lighting.i
 
 # target to preprocess a source file
-Application.cpp.i:
-	$(MAKE) -f CMakeFiles/gl5.dir/build.make CMakeFiles/gl5.dir/Application.cpp.i
-.PHONY : Application.cpp.i
+Lighting.cpp.i:
+	$(MAKE) -f CMakeFiles/gl6.dir/build.make CMakeFiles/gl6.dir/Lighting.cpp.i
+.PHONY : Lighting.cpp.i
 
-Application.s: Application.cpp.s
+Lighting.s: Lighting.cpp.s
 
-.PHONY : Application.s
+.PHONY : Lighting.s
 
 # target to generate assembly for a file
-Application.cpp.s:
-	$(MAKE) -f CMakeFiles/gl5.dir/build.make CMakeFiles/gl5.dir/Application.cpp.s
-.PHONY : Application.cpp.s
+Lighting.cpp.s:
+	$(MAKE) -f CMakeFiles/gl6.dir/build.make CMakeFiles/gl6.dir/Lighting.cpp.s
+.PHONY : Lighting.cpp.s
 
 src/Core.o: src/Core.cpp.o
 
@@ -173,7 +173,7 @@ src/Core.o: src/Core.cpp.o
 
 # target to build an object file
 src/Core.cpp.o:
-	$(MAKE) -f CMakeFiles/gl5.dir/build.make CMakeFiles/gl5.dir/src/Core.cpp.o
+	$(MAKE) -f CMakeFiles/gl6.dir/build.make CMakeFiles/gl6.dir/src/Core.cpp.o
 .PHONY : src/Core.cpp.o
 
 src/Core.i: src/Core.cpp.i
@@ -182,7 +182,7 @@ src/Core.i: src/Core.cpp.i
 
 # target to preprocess a source file
 src/Core.cpp.i:
-	$(MAKE) -f CMakeFiles/gl5.dir/build.make CMakeFiles/gl5.dir/src/Core.cpp.i
+	$(MAKE) -f CMakeFiles/gl6.dir/build.make CMakeFiles/gl6.dir/src/Core.cpp.i
 .PHONY : src/Core.cpp.i
 
 src/Core.s: src/Core.cpp.s
@@ -191,7 +191,7 @@ src/Core.s: src/Core.cpp.s
 
 # target to generate assembly for a file
 src/Core.cpp.s:
-	$(MAKE) -f CMakeFiles/gl5.dir/build.make CMakeFiles/gl5.dir/src/Core.cpp.s
+	$(MAKE) -f CMakeFiles/gl6.dir/build.make CMakeFiles/gl6.dir/src/Core.cpp.s
 .PHONY : src/Core.cpp.s
 
 src/glad.o: src/glad.c.o
@@ -200,7 +200,7 @@ src/glad.o: src/glad.c.o
 
 # target to build an object file
 src/glad.c.o:
-	$(MAKE) -f CMakeFiles/gl5.dir/build.make CMakeFiles/gl5.dir/src/glad.c.o
+	$(MAKE) -f CMakeFiles/gl6.dir/build.make CMakeFiles/gl6.dir/src/glad.c.o
 .PHONY : src/glad.c.o
 
 src/glad.i: src/glad.c.i
@@ -209,7 +209,7 @@ src/glad.i: src/glad.c.i
 
 # target to preprocess a source file
 src/glad.c.i:
-	$(MAKE) -f CMakeFiles/gl5.dir/build.make CMakeFiles/gl5.dir/src/glad.c.i
+	$(MAKE) -f CMakeFiles/gl6.dir/build.make CMakeFiles/gl6.dir/src/glad.c.i
 .PHONY : src/glad.c.i
 
 src/glad.s: src/glad.c.s
@@ -218,7 +218,7 @@ src/glad.s: src/glad.c.s
 
 # target to generate assembly for a file
 src/glad.c.s:
-	$(MAKE) -f CMakeFiles/gl5.dir/build.make CMakeFiles/gl5.dir/src/glad.c.s
+	$(MAKE) -f CMakeFiles/gl6.dir/build.make CMakeFiles/gl6.dir/src/glad.c.s
 .PHONY : src/glad.c.s
 
 src/shader.o: src/shader.cpp.o
@@ -227,7 +227,7 @@ src/shader.o: src/shader.cpp.o
 
 # target to build an object file
 src/shader.cpp.o:
-	$(MAKE) -f CMakeFiles/gl5.dir/build.make CMakeFiles/gl5.dir/src/shader.cpp.o
+	$(MAKE) -f CMakeFiles/gl6.dir/build.make CMakeFiles/gl6.dir/src/shader.cpp.o
 .PHONY : src/shader.cpp.o
 
 src/shader.i: src/shader.cpp.i
@@ -236,7 +236,7 @@ src/shader.i: src/shader.cpp.i
 
 # target to preprocess a source file
 src/shader.cpp.i:
-	$(MAKE) -f CMakeFiles/gl5.dir/build.make CMakeFiles/gl5.dir/src/shader.cpp.i
+	$(MAKE) -f CMakeFiles/gl6.dir/build.make CMakeFiles/gl6.dir/src/shader.cpp.i
 .PHONY : src/shader.cpp.i
 
 src/shader.s: src/shader.cpp.s
@@ -245,7 +245,7 @@ src/shader.s: src/shader.cpp.s
 
 # target to generate assembly for a file
 src/shader.cpp.s:
-	$(MAKE) -f CMakeFiles/gl5.dir/build.make CMakeFiles/gl5.dir/src/shader.cpp.s
+	$(MAKE) -f CMakeFiles/gl6.dir/build.make CMakeFiles/gl6.dir/src/shader.cpp.s
 .PHONY : src/shader.cpp.s
 
 src/texture.o: src/texture.cpp.o
@@ -254,7 +254,7 @@ src/texture.o: src/texture.cpp.o
 
 # target to build an object file
 src/texture.cpp.o:
-	$(MAKE) -f CMakeFiles/gl5.dir/build.make CMakeFiles/gl5.dir/src/texture.cpp.o
+	$(MAKE) -f CMakeFiles/gl6.dir/build.make CMakeFiles/gl6.dir/src/texture.cpp.o
 .PHONY : src/texture.cpp.o
 
 src/texture.i: src/texture.cpp.i
@@ -263,7 +263,7 @@ src/texture.i: src/texture.cpp.i
 
 # target to preprocess a source file
 src/texture.cpp.i:
-	$(MAKE) -f CMakeFiles/gl5.dir/build.make CMakeFiles/gl5.dir/src/texture.cpp.i
+	$(MAKE) -f CMakeFiles/gl6.dir/build.make CMakeFiles/gl6.dir/src/texture.cpp.i
 .PHONY : src/texture.cpp.i
 
 src/texture.s: src/texture.cpp.s
@@ -272,7 +272,7 @@ src/texture.s: src/texture.cpp.s
 
 # target to generate assembly for a file
 src/texture.cpp.s:
-	$(MAKE) -f CMakeFiles/gl5.dir/build.make CMakeFiles/gl5.dir/src/texture.cpp.s
+	$(MAKE) -f CMakeFiles/gl6.dir/build.make CMakeFiles/gl6.dir/src/texture.cpp.s
 .PHONY : src/texture.cpp.s
 
 # Help Target
@@ -283,10 +283,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... gl5"
-	@echo "... Application.o"
-	@echo "... Application.i"
-	@echo "... Application.s"
+	@echo "... gl6"
+	@echo "... Lighting.o"
+	@echo "... Lighting.i"
+	@echo "... Lighting.s"
 	@echo "... src/Core.o"
 	@echo "... src/Core.i"
 	@echo "... src/Core.s"
