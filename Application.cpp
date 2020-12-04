@@ -5,7 +5,7 @@ class Application:public Engine{
 
 public:
     Application():Engine(){};
-    ~Application();
+    ~Application(){};
 
 void run(){
         
@@ -56,7 +56,8 @@ int main(){
     r = (float)135 / 255;
     g = (float)80 / 255;
     b = (float)199 / 255;
-    while (true)
+
+    while (!glfwWindowShouldClose(app->window))
     {
         glClearColor(r, g, b, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 

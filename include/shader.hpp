@@ -13,6 +13,7 @@ class shader{
         shader(const char* vertexPath, const char* fragmentPath);
         ~shader();
 
+
         bool createProgram();
         void use();
         uint16_t ID;    // shader program id

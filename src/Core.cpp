@@ -52,7 +52,7 @@ Engine::~Engine(){
 }
 
 
-bool Engine::start()
+bool Engine::start(const char* vshader_path, const char* fshader_path ,const char* texture_path)
 {
     // generate buffer for vao
     glGenVertexArrays(1, &VAO);
@@ -73,7 +73,11 @@ bool Engine::start()
 
 
     // create shader object 
-    m_shader_program = new shader("../shaders/vertexshader.txt", "../shaders/fragmentshader.txt");
+    
+    m_shader_program = new shader(
+        vshader_path ? vshader_path : "../shaders/vertexshader.txt",
+        fshader_path ? fshader_path : "../shaders/fragmentshader.txt"
+         );
     uint32_t shader_link =  m_shader_program->createProgram();
     if (!shader_link){
         std::cout<<" ERROR OCCURED IN CREATION OF SHADER PROGRAM "<<std::endl;
@@ -113,4 +117,14 @@ void Engine::processInput()
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
 
+}
+
+int Engine::Width()
+{
+    return m_width;
+}
+
+int Engine::Height(){
+
+    return m_height;
 }

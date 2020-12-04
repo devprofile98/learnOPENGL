@@ -35,6 +35,7 @@ shader::~shader(){
 
 }
 
+
 bool shader::createProgram()
 {
     int success;
@@ -99,3 +100,4 @@ void shader::use(){
     glUseProgram(ID);
 
 }
+
