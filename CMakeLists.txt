@@ -13,10 +13,10 @@ set(SOURCES
 
 find_package (Threads)
 
-add_executable(gl6 ${SOURCES})
-target_include_directories(gl6 PUBLIC "./include/")
+add_executable(gl7 ${SOURCES})
+target_include_directories(gl7 PUBLIC "./include/")
 message(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_THREAD_LIBS_INIT} ${CMAKE_DL_LIBS})
-target_link_libraries(gl6 ${CMAKE_CURRENT_SOURCE_DIR}/glfw/glfw/build/src/libglfw3.a)
-target_link_libraries(gl6 ${CMAKE_DL_LIBS})
-target_link_libraries (gl6 ${CMAKE_THREAD_LIBS_INIT})
-target_link_directories(gl6 PUBLIC "./src/")
+target_link_libraries(gl7 ${CMAKE_CURRENT_SOURCE_DIR}/glfw/glfw/build/src/libglfw3.a)
+target_link_libraries(gl7 ${CMAKE_DL_LIBS})
+target_link_libraries (gl7 ${CMAKE_THREAD_LIBS_INIT})
+target_link_directories(gl7 PUBLIC "./src/")

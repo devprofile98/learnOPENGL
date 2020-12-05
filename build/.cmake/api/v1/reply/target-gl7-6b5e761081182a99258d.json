@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "gl6"
+			"path" : "gl7"
 		}
 	],
 	"backtrace" : 1,
@@ -108,7 +108,7 @@
 			]
 		}
 	],
-	"id" : "gl6::@6890427a1f51a3e7e1df",
+	"id" : "gl7::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -144,8 +144,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "gl6",
-	"nameOnDisk" : "gl6",
+	"name" : "gl7",
+	"nameOnDisk" : "gl7",
 	"paths" : 
 	{
 		"build" : ".",

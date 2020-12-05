@@ -16,7 +16,6 @@ public:
 
     uint32_t viewPos = glGetUniformLocation(m_shader_program->ID, "viewPos");
     glUniform3fv(viewPos,1,glm::value_ptr(cameraPos));
-
     view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
     glUniformMatrix4fv(view_location, 1, GL_FALSE, glm::value_ptr(view));
     glBindVertexArray(VAO);
@@ -62,6 +61,16 @@ for(int i=0;i<5;i++){
         glUniform3fv(objColor,1, glm::value_ptr(glm::vec3(1.0f, 0.5f, 0.31f)));
         glUniform3fv(lightColor,1, glm::value_ptr(glm::vec3(1.0f)));
 
+        m_shader_program->setVec3("material.ambient", 0.8f, 0.5f, 0.31f);
+        m_shader_program->setVec3("material.diffuse",0.8f, 0.5f, 0.31f);
+        m_shader_program->setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+        m_shader_program->setFloat("material.shininess", 64.0f);
+
+
+        m_shader_program->setVec3("light.ambient",  0.2f, 0.2f, 0.2f);
+        m_shader_program->setVec3("light.diffuse",  0.5f, 0.5f, 0.5f); // darken diffuse light a bit
+        m_shader_program->setVec3("light.specular", 1.0f, 1.0f, 1.0f); 
+        m_shader_program->setVec3("light.position", 1.0f, 0.5f, 5.0f);
 
     }
 
@@ -139,6 +148,7 @@ int main(){
     model_l = glGetUniformLocation(lightshader.ID,"model");
     view_l = glGetUniformLocation(lightshader.ID,"view");
     projection_l = glGetUniformLocation(lightshader.ID,"projection");
+    
     std::cout<<" light shader unifrom locations are "<<model_l<<view_l<<projection_l<<std::endl;
     glm::mat4 projection =  glm::perspective(glm::radians(45.0f), static_cast<float>(app->Width()/ app->Height()), 0.1f, 100.0f);
     glUniformMatrix4fv(projection_l, 1, GL_FALSE, glm::value_ptr(projection));
