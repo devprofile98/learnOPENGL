@@ -15,13 +15,13 @@ public:
     glm::mat4 view = glm::mat4(1.0f);
 
     uint32_t viewPos = glGetUniformLocation(m_shader_program->ID, "viewPos");
-    glUniform3fv(viewPos,1,glm::value_ptr(cameraPos));
-    view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+    glUniform3fv(viewPos,1,glm::value_ptr(Engine::cameraPos));
+    view = glm::lookAt(Engine::cameraPos, Engine::cameraPos + Engine::cameraFront, Engine::cameraUp);
     glUniformMatrix4fv(view_location, 1, GL_FALSE, glm::value_ptr(view));
     glBindVertexArray(VAO);
 
     // Drawing 
-for(int i=0;i<5;i++){
+for(int i=0;i<10;i++){
     // glBindTexture(GL_TEXTURE_2D, m_texture2->getID());
     glm::mat4 model = glm::mat4(1.0f);
     // std::cout<<i<< " "<<cubePositions[i].x<<" "<<cubePositions[i].y<<" "<<cubePositions[i].z<<std::endl;
@@ -125,6 +125,11 @@ for(int i=0;i<5;i++){
     }
 };
 
+const float sensitivity = 0.01f;
+float yaw,pitch;
+bool firstTime = true;
+float lastX=540, lastY=540;
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     // make sure the viewport matches the new window dimensions; note that width and 
@@ -132,6 +137,43 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     aspectRatio = (float)height/width ;
     glViewport(0, 0, width, height);
 }
+
+void mouse_callback(GLFWwindow* window, double xpos, double ypos){
+    std::cout<<"XPOS AND YPOS IS "<<xpos<<" "<<ypos<<std::endl;
+
+    if(firstTime){
+        
+        lastX = xpos;
+        lastY = ypos;
+        firstTime = false;
+    }
+
+    float xoffset = xpos - lastX;
+    float yoffset = lastY - ypos;
+
+    lastX = xpos;
+    lastY = ypos;
+
+    xoffset *= sensitivity;
+    yoffset *= sensitivity;
+
+    yaw   += xoffset;
+    pitch += yoffset;  
+
+    if(pitch > 89.0f)
+        pitch =  89.0f;
+    if(pitch < -89.0f)
+        pitch = -89.0f;
+
+    glm::vec3 direction;
+    direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    direction.y = sin(glm::radians(pitch));
+    direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    Engine::cameraFront = glm::normalize(direction);
+
+}
+
+
 
 
 int main(){
@@ -167,7 +209,7 @@ int main(){
     b = (float)199 / 255;
     
 
-    while (!glfwWindowShouldClose(app->window))
+    while (!glfwWindowShouldClose(app->window) && glfwGetKey(app->window,GLFW_KEY_ESCAPE) != GLFW_PRESS)
     {
         glClearColor(0, 0, 0, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
@@ -176,7 +218,7 @@ int main(){
         app->lastFrame = currentFrame;        
         app->processInput();    
 
-        view = glm::lookAt(app->cameraPos, app->cameraPos + app->cameraFront, app->cameraUp);
+        view = glm::lookAt(Engine::cameraPos, Engine::cameraPos + Engine::cameraFront, Engine::cameraUp);
         lightshader.use();
         glUniformMatrix4fv(view_l,1,GL_FALSE,glm::value_ptr(view));
         glm::mat4 model = glm::mat4(1.0f);

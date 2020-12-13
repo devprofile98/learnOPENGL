@@ -24,6 +24,7 @@ Engine::Engine()
         }
         glfwMakeContextCurrent(window);
         glfwSetFramebufferSizeCallback(window,framebuffer_size_callback);
+        glfwSetCursorPosCallback(window, mouse_callback);
 
         // glad: load all OpenGL function pointers
         // ---------------------------------------
@@ -36,11 +37,8 @@ Engine::Engine()
         // -----------------------------
         glEnable(GL_DEPTH_TEST);
 
-        // vertices = 
 
-    // cubePositions 
-
-
+        glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 }
 
@@ -108,14 +106,14 @@ void Engine::processInput()
 {
     float cameraSpeed = 2.5f * deltaTime ;
     if(glfwGetKey(window,GLFW_KEY_W) == GLFW_PRESS){
-        cameraPos += cameraSpeed*cameraFront;
+        Engine::cameraPos += cameraSpeed*Engine::cameraFront;
     }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        cameraPos -= cameraSpeed * cameraFront;
+        Engine::cameraPos -= cameraSpeed * Engine::cameraFront;
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+        Engine::cameraPos -= glm::normalize(glm::cross(Engine::cameraFront, Engine::cameraUp)) * cameraSpeed;
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+        Engine::cameraPos += glm::normalize(glm::cross(Engine::cameraFront, Engine::cameraUp)) * cameraSpeed;
 
 }
 
@@ -128,3 +126,8 @@ int Engine::Height(){
 
     return m_height;
 }
+
+
+glm::vec3 Engine::cameraPos   = glm::vec3(0.0f, 0.0f,  10.0f);
+glm::vec3 Engine::cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+glm::vec3 Engine::cameraUp    = glm::vec3(0.0f, 1.0f,  0.0f);

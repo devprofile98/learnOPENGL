@@ -50,9 +50,9 @@ public:
     int Width();
     int Height();
 
-    glm::vec3 cameraPos   = glm::vec3(0.0f, 0.0f,  10.0f);
-    glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
-    glm::vec3 cameraUp    = glm::vec3(0.0f, 1.0f,  0.0f);
+    static glm::vec3 cameraPos;
+    static glm::vec3 cameraFront;
+    static glm::vec3 cameraUp;
 
 protected:
 
@@ -131,5 +131,6 @@ protected:
 };
 
 extern void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+extern void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 
 #endif
