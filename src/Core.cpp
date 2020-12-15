@@ -52,6 +52,8 @@ Engine::~Engine(){
 
 bool Engine::start(const char* vshader_path, const char* fshader_path ,const char* texture_path)
 {
+    /*
+
     // generate buffer for vao
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -93,7 +95,8 @@ bool Engine::start(const char* vshader_path, const char* fshader_path ,const cha
 
     projection =  glm::perspective(glm::radians(45.0f), static_cast<float>(m_width / m_height), 0.1f, 100.0f);
     glUniformMatrix4fv(projection_location, 1, GL_FALSE, glm::value_ptr(projection));
-
+    
+    */
     return true;
 }
 

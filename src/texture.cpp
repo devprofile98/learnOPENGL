@@ -3,11 +3,11 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-Texture::Texture(const char* texture_path){
+Texture::Texture(const char* texture_path, uint32_t layout_location){
 
     int width, height,channel;
     unsigned char* data = stbi_load(texture_path, &width,&height,&channel,0);
-
+    m_ID = layout_location;
     glGenTextures(1, &m_ID);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);

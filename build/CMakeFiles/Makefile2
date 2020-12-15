@@ -70,7 +70,7 @@ CMAKE_BINARY_DIR = /home/sub/Documents/Projects/cpp/opengl/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/gl7.dir/all
+all: CMakeFiles/gl8.dir/all
 
 .PHONY : all
 
@@ -80,36 +80,36 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/gl7.dir/clean
+clean: CMakeFiles/gl8.dir/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/gl7.dir
+# Target rules for target CMakeFiles/gl8.dir
 
 # All Build rule for target.
-CMakeFiles/gl7.dir/all:
-	$(MAKE) -f CMakeFiles/gl7.dir/build.make CMakeFiles/gl7.dir/depend
-	$(MAKE) -f CMakeFiles/gl7.dir/build.make CMakeFiles/gl7.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sub/Documents/Projects/cpp/opengl/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target gl7"
-.PHONY : CMakeFiles/gl7.dir/all
+CMakeFiles/gl8.dir/all:
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/depend
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sub/Documents/Projects/cpp/opengl/build/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target gl8"
+.PHONY : CMakeFiles/gl8.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/gl7.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/sub/Documents/Projects/cpp/opengl/build/CMakeFiles 6
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/gl7.dir/all
+CMakeFiles/gl8.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sub/Documents/Projects/cpp/opengl/build/CMakeFiles 7
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/gl8.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/sub/Documents/Projects/cpp/opengl/build/CMakeFiles 0
-.PHONY : CMakeFiles/gl7.dir/rule
+.PHONY : CMakeFiles/gl8.dir/rule
 
 # Convenience name for target.
-gl7: CMakeFiles/gl7.dir/rule
+gl8: CMakeFiles/gl8.dir/rule
 
-.PHONY : gl7
+.PHONY : gl8
 
 # clean rule for target.
-CMakeFiles/gl7.dir/clean:
-	$(MAKE) -f CMakeFiles/gl7.dir/build.make CMakeFiles/gl7.dir/clean
-.PHONY : CMakeFiles/gl7.dir/clean
+CMakeFiles/gl8.dir/clean:
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/clean
+.PHONY : CMakeFiles/gl8.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

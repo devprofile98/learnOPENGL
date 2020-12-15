@@ -1,8 +1,10 @@
 #include "Core.hpp"
+#include "object.hpp"
+#include <array>
 
 
 float aspectRatio = 0;
-
+std::array<object , 10> rects{};
 
 class Application : public Engine{
 public:
@@ -11,10 +13,10 @@ public:
 
     void run(){
         
-    m_shader_program->use();
+    rects[0].getShader()->use();
     glm::mat4 view = glm::mat4(1.0f);
 
-    uint32_t viewPos = glGetUniformLocation(m_shader_program->ID, "viewPos");
+    uint32_t viewPos = glGetUniformLocation(rects[0].getShader()->ID, "viewPos");
     glUniform3fv(viewPos,1,glm::value_ptr(Engine::cameraPos));
     view = glm::lookAt(Engine::cameraPos, Engine::cameraPos + Engine::cameraFront, Engine::cameraUp);
     glUniformMatrix4fv(view_location, 1, GL_FALSE, glm::value_ptr(view));
@@ -25,14 +27,14 @@ for(int i=0;i<10;i++){
     // glBindTexture(GL_TEXTURE_2D, m_texture2->getID());
     glm::mat4 model = glm::mat4(1.0f);
     // std::cout<<i<< " "<<cubePositions[i].x<<" "<<cubePositions[i].y<<" "<<cubePositions[i].z<<std::endl;
-    model = glm::translate(model, cubePositions[i]);
+    model = glm::translate(model, rects[i].getPosition());
     // model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0,0.0,1.0));
     model = glm::scale(model, glm::vec3(aspectRatio, 1.0f, 1.0f));
     glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(model));
     // glUniform1f(color_index, (0.1f * ((i+1)%5)) + 0.1);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    // glDrawArrays(GL_TRIANGLES, 0, 6);
     // glBindTexture(GL_TEXTURE_2D, m_texture1->getID());`
-    glDrawArrays(GL_TRIANGLES, 6, 36);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
 }
 // End of drawing
 
@@ -53,32 +55,30 @@ for(int i=0;i<10;i++){
         glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(0*sizeof(float)));
         glEnableVertexAttribArray(0);
 
-        m_shader_program->use();
+        rects[0].getShader()->use();
         uint32_t objColor,lightColor;
-        objColor = glGetUniformLocation(m_shader_program->ID, "objectColor");
-        lightColor= glGetUniformLocation(m_shader_program->ID, "lightColor");
+        objColor = glGetUniformLocation(rects[0].getShader()->ID, "objectColor");
+        lightColor= glGetUniformLocation(rects[0].getShader()->ID, "lightColor");
 
         glUniform3fv(objColor,1, glm::value_ptr(glm::vec3(1.0f, 0.5f, 0.31f)));
         glUniform3fv(lightColor,1, glm::value_ptr(glm::vec3(1.0f)));
 
-        m_shader_program->setVec3("material.ambient", 0.8f, 0.5f, 0.31f);
-        m_shader_program->setVec3("material.diffuse",0.8f, 0.5f, 0.31f);
-        m_shader_program->setVec3("material.specular", 0.5f, 0.5f, 0.5f);
-        m_shader_program->setFloat("material.shininess", 64.0f);
+        rects[0].getShader()->setVec3("material.ambient", 0.8f, 0.5f, 0.31f);
+        rects[0].getShader()->setVec3("material.diffuse",0.8f, 0.5f, 0.31f);
+        rects[0].getShader()->setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+        rects[0].getShader()->setFloat("material.shininess", 64.0f);
 
 
-        m_shader_program->setVec3("light.ambient",  0.2f, 0.2f, 0.2f);
-        m_shader_program->setVec3("light.diffuse",  0.5f, 0.5f, 0.5f); // darken diffuse light a bit
-        m_shader_program->setVec3("light.specular", 1.0f, 1.0f, 1.0f); 
-        m_shader_program->setVec3("light.position", 1.0f, 0.5f, 5.0f);
+        rects[0].getShader()->setVec3("light.ambient",  0.2f, 0.2f, 0.2f);
+        rects[0].getShader()->setVec3("light.diffuse",  0.5f, 0.5f, 0.5f); // darken diffuse light a bit
+        rects[0].getShader()->setVec3("light.specular", 1.0f, 1.0f, 1.0f); 
+        rects[0].getShader()->setVec3("light.position", 1.0f, 0.5f, 5.0f);
 
     }
 
     bool start(const char* vshader_path, const char* fshader_path ,const char* texture_path)
     {
 
-        std::cout<<"DAYI GOLOO HA MAN INJA HASTAM\n\n\n\n\n\n"<<std::endl;
-        std::cout<<"DAYI GOLOO HA MAN INJA HASTAM"<<std::endl;
         // generate buffer for vao
         glGenVertexArrays(1, &VAO);
         glGenBuffers(1, &VBO);
@@ -95,27 +95,32 @@ for(int i=0;i<10;i++){
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
 
-        m_shader_program = new shader(
-            vshader_path ? vshader_path : "../shaders/vertexshader.txt",
-            fshader_path ? fshader_path : "../shaders/fragmentshader.txt"
-            );
-        uint32_t shader_link =  m_shader_program->createProgram();
-        if (!shader_link){
-            std::cout<<" ERROR OCCURED IN CREATION OF SHADER PROGRAM "<<std::endl;
-            return false;
-        }
+        rects[0].setShaderProgram(vshader_path, fshader_path);
+        // rects[0].setTexture(texture_path);
+        
 
-        // create texture instance -> texture will be bound inside constructor
-        m_texture1 = new Texture("../shaders/side.jpg");
-        m_texture2 = new Texture("../shaders/minecraft-person1-face.jpg");
+        // m_shader_program = new shader(
+        //     vshader_path ? vshader_path : "../shaders/vertexshader.txt",
+        //     fshader_path ? fshader_path : "../shaders/fragmentshader.txt"
+        //     );
+        // uint32_t shader_link =  m_shader_program->createProgram();
+        // if (!shader_link){
+        //     std::cout<<" ERROR OCCURED IN CREATION OF SHADER PROGRAM "<<std::endl;
+        //     return false;
+        // }
 
-        m_shader_program->use();
-        model_location = glGetUniformLocation(m_shader_program->ID, "model");
-        view_location = glGetUniformLocation(m_shader_program->ID, "view");
-        projection_location = glGetUniformLocation(m_shader_program->ID, "projection");
-        uint32_t light_location;
-        light_location = glGetUniformLocation(m_shader_program->ID, "lightPos");
-        glUniform3fv(light_location, 1, glm::value_ptr(glm::vec3(1.0f, 0.5f, 5.0f)));
+        // // create texture instance -> texture will be bound inside constructor
+        // m_texture1 = new Texture("../shaders/side.jpg");
+        // m_texture2 = new Texture("../shaders/minecraft-person1-face.jpg");
+
+        rects[0].getShader()->use();
+        // m_shader_program->use();
+        model_location = glGetUniformLocation(rects[0].getShader()->ID, "model");
+        view_location = glGetUniformLocation(rects[0].getShader()->ID, "view");
+        projection_location = glGetUniformLocation(rects[0].getShader()->ID, "projection");
+        // uint32_t light_location;
+        // light_location = glGetUniformLocation(m_shader_program->ID, "lightPos");
+        // glUniform3fv(light_location, 1, glm::value_ptr(glm::vec3(1.0f, 0.5f, 5.0f)));
 
         projection =  glm::perspective(glm::radians(45.0f), static_cast<float>(m_width / m_height), 0.1f, 100.0f);
         glUniformMatrix4fv(projection_location, 1, GL_FALSE, glm::value_ptr(projection));
@@ -139,7 +144,6 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 }
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos){
-    std::cout<<"XPOS AND YPOS IS "<<xpos<<" "<<ypos<<std::endl;
 
     if(firstTime){
         
@@ -179,8 +183,15 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos){
 int main(){
 
     Application *app = new Application{};
+
+    for(int i =0;i<rects.size();i++)
+    {
+        rects[i].setPosition(app->cubePositions[i]);
+    }
+
     app->start(nullptr,"../shaders/lightingFragmentShader.txt",nullptr);
     app->config();
+    std::cout<<"DEBUG TEST FOR SEGMENTATION FAULT"<<std::endl;
     aspectRatio = (float)app->Width() / app->Height();
 
     shader lightshader("../shaders/vertexshader.txt","../shaders/lightsourceFragment.txt");
@@ -215,7 +226,8 @@ int main(){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
         float currentFrame = glfwGetTime();
         app->deltaTime = currentFrame - app->lastFrame;
-        app->lastFrame = currentFrame;        
+        app->lastFrame = currentFrame;     
+        std::cout<<1.0f / app->deltaTime<<" FPS"<<std::endl;    
         app->processInput();    
 
         view = glm::lookAt(Engine::cameraPos, Engine::cameraPos + Engine::cameraFront, Engine::cameraUp);

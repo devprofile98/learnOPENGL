@@ -128,17 +128,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named gl7
+# Target rules for targets named gl8
 
 # Build rule for target.
-gl7: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 gl7
-.PHONY : gl7
+gl8: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gl8
+.PHONY : gl8
 
 # fast build rule for target.
-gl7/fast:
-	$(MAKE) -f CMakeFiles/gl7.dir/build.make CMakeFiles/gl7.dir/build
-.PHONY : gl7/fast
+gl8/fast:
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/build
+.PHONY : gl8/fast
 
 Lighting.o: Lighting.cpp.o
 
@@ -146,7 +146,7 @@ Lighting.o: Lighting.cpp.o
 
 # target to build an object file
 Lighting.cpp.o:
-	$(MAKE) -f CMakeFiles/gl7.dir/build.make CMakeFiles/gl7.dir/Lighting.cpp.o
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/Lighting.cpp.o
 .PHONY : Lighting.cpp.o
 
 Lighting.i: Lighting.cpp.i
@@ -155,7 +155,7 @@ Lighting.i: Lighting.cpp.i
 
 # target to preprocess a source file
 Lighting.cpp.i:
-	$(MAKE) -f CMakeFiles/gl7.dir/build.make CMakeFiles/gl7.dir/Lighting.cpp.i
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/Lighting.cpp.i
 .PHONY : Lighting.cpp.i
 
 Lighting.s: Lighting.cpp.s
@@ -164,8 +164,35 @@ Lighting.s: Lighting.cpp.s
 
 # target to generate assembly for a file
 Lighting.cpp.s:
-	$(MAKE) -f CMakeFiles/gl7.dir/build.make CMakeFiles/gl7.dir/Lighting.cpp.s
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/Lighting.cpp.s
 .PHONY : Lighting.cpp.s
+
+include/Engine/object.o: include/Engine/object.cpp.o
+
+.PHONY : include/Engine/object.o
+
+# target to build an object file
+include/Engine/object.cpp.o:
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/include/Engine/object.cpp.o
+.PHONY : include/Engine/object.cpp.o
+
+include/Engine/object.i: include/Engine/object.cpp.i
+
+.PHONY : include/Engine/object.i
+
+# target to preprocess a source file
+include/Engine/object.cpp.i:
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/include/Engine/object.cpp.i
+.PHONY : include/Engine/object.cpp.i
+
+include/Engine/object.s: include/Engine/object.cpp.s
+
+.PHONY : include/Engine/object.s
+
+# target to generate assembly for a file
+include/Engine/object.cpp.s:
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/include/Engine/object.cpp.s
+.PHONY : include/Engine/object.cpp.s
 
 src/Core.o: src/Core.cpp.o
 
@@ -173,7 +200,7 @@ src/Core.o: src/Core.cpp.o
 
 # target to build an object file
 src/Core.cpp.o:
-	$(MAKE) -f CMakeFiles/gl7.dir/build.make CMakeFiles/gl7.dir/src/Core.cpp.o
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/src/Core.cpp.o
 .PHONY : src/Core.cpp.o
 
 src/Core.i: src/Core.cpp.i
@@ -182,7 +209,7 @@ src/Core.i: src/Core.cpp.i
 
 # target to preprocess a source file
 src/Core.cpp.i:
-	$(MAKE) -f CMakeFiles/gl7.dir/build.make CMakeFiles/gl7.dir/src/Core.cpp.i
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/src/Core.cpp.i
 .PHONY : src/Core.cpp.i
 
 src/Core.s: src/Core.cpp.s
@@ -191,7 +218,7 @@ src/Core.s: src/Core.cpp.s
 
 # target to generate assembly for a file
 src/Core.cpp.s:
-	$(MAKE) -f CMakeFiles/gl7.dir/build.make CMakeFiles/gl7.dir/src/Core.cpp.s
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/src/Core.cpp.s
 .PHONY : src/Core.cpp.s
 
 src/glad.o: src/glad.c.o
@@ -200,7 +227,7 @@ src/glad.o: src/glad.c.o
 
 # target to build an object file
 src/glad.c.o:
-	$(MAKE) -f CMakeFiles/gl7.dir/build.make CMakeFiles/gl7.dir/src/glad.c.o
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/src/glad.c.o
 .PHONY : src/glad.c.o
 
 src/glad.i: src/glad.c.i
@@ -209,7 +236,7 @@ src/glad.i: src/glad.c.i
 
 # target to preprocess a source file
 src/glad.c.i:
-	$(MAKE) -f CMakeFiles/gl7.dir/build.make CMakeFiles/gl7.dir/src/glad.c.i
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/src/glad.c.i
 .PHONY : src/glad.c.i
 
 src/glad.s: src/glad.c.s
@@ -218,7 +245,7 @@ src/glad.s: src/glad.c.s
 
 # target to generate assembly for a file
 src/glad.c.s:
-	$(MAKE) -f CMakeFiles/gl7.dir/build.make CMakeFiles/gl7.dir/src/glad.c.s
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/src/glad.c.s
 .PHONY : src/glad.c.s
 
 src/shader.o: src/shader.cpp.o
@@ -227,7 +254,7 @@ src/shader.o: src/shader.cpp.o
 
 # target to build an object file
 src/shader.cpp.o:
-	$(MAKE) -f CMakeFiles/gl7.dir/build.make CMakeFiles/gl7.dir/src/shader.cpp.o
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/src/shader.cpp.o
 .PHONY : src/shader.cpp.o
 
 src/shader.i: src/shader.cpp.i
@@ -236,7 +263,7 @@ src/shader.i: src/shader.cpp.i
 
 # target to preprocess a source file
 src/shader.cpp.i:
-	$(MAKE) -f CMakeFiles/gl7.dir/build.make CMakeFiles/gl7.dir/src/shader.cpp.i
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/src/shader.cpp.i
 .PHONY : src/shader.cpp.i
 
 src/shader.s: src/shader.cpp.s
@@ -245,7 +272,7 @@ src/shader.s: src/shader.cpp.s
 
 # target to generate assembly for a file
 src/shader.cpp.s:
-	$(MAKE) -f CMakeFiles/gl7.dir/build.make CMakeFiles/gl7.dir/src/shader.cpp.s
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/src/shader.cpp.s
 .PHONY : src/shader.cpp.s
 
 src/texture.o: src/texture.cpp.o
@@ -254,7 +281,7 @@ src/texture.o: src/texture.cpp.o
 
 # target to build an object file
 src/texture.cpp.o:
-	$(MAKE) -f CMakeFiles/gl7.dir/build.make CMakeFiles/gl7.dir/src/texture.cpp.o
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/src/texture.cpp.o
 .PHONY : src/texture.cpp.o
 
 src/texture.i: src/texture.cpp.i
@@ -263,7 +290,7 @@ src/texture.i: src/texture.cpp.i
 
 # target to preprocess a source file
 src/texture.cpp.i:
-	$(MAKE) -f CMakeFiles/gl7.dir/build.make CMakeFiles/gl7.dir/src/texture.cpp.i
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/src/texture.cpp.i
 .PHONY : src/texture.cpp.i
 
 src/texture.s: src/texture.cpp.s
@@ -272,7 +299,7 @@ src/texture.s: src/texture.cpp.s
 
 # target to generate assembly for a file
 src/texture.cpp.s:
-	$(MAKE) -f CMakeFiles/gl7.dir/build.make CMakeFiles/gl7.dir/src/texture.cpp.s
+	$(MAKE) -f CMakeFiles/gl8.dir/build.make CMakeFiles/gl8.dir/src/texture.cpp.s
 .PHONY : src/texture.cpp.s
 
 # Help Target
@@ -283,10 +310,13 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... gl7"
+	@echo "... gl8"
 	@echo "... Lighting.o"
 	@echo "... Lighting.i"
 	@echo "... Lighting.s"
+	@echo "... include/Engine/object.o"
+	@echo "... include/Engine/object.i"
+	@echo "... include/Engine/object.s"
 	@echo "... src/Core.o"
 	@echo "... src/Core.i"
 	@echo "... src/Core.s"
