@@ -27,6 +27,8 @@ class shader{
         void setVec3(const char* uniform_name,float x, float y, float z) const ;
 
         void setFloat(const char* uniform_name, float value) const ;
+        void setInt(const char* uniform_name, int value) const;
+        void setMat4(const std::string &name, const glm::mat4 &mat) const;
 
 
 

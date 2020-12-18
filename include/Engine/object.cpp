@@ -45,6 +45,7 @@ shader* object::getShader() const {
 
 void object::setTexture(const char* texture_image_path,uint8_t layout_location){
     m_texture = new Texture(texture_image_path);
+    std::cout<<"object Texture created with id: "<<m_texture->getID()<<std::endl;
 }
 
 Texture* object::getTexture() const{

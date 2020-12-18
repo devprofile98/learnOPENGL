@@ -23,6 +23,7 @@ Engine::Engine()
             glfwTerminate();
         }
         glfwMakeContextCurrent(window);
+        glfwSwapInterval( 0 ); // remove glfw 60fps limit
         glfwSetFramebufferSizeCallback(window,framebuffer_size_callback);
         glfwSetCursorPosCallback(window, mouse_callback);
 
@@ -52,7 +53,6 @@ Engine::~Engine(){
 
 bool Engine::start(const char* vshader_path, const char* fshader_path ,const char* texture_path)
 {
-    /*
 
     // generate buffer for vao
     glGenVertexArrays(1, &VAO);
@@ -66,10 +66,13 @@ bool Engine::start(const char* vshader_path, const char* fshader_path ,const cha
     glBufferData(GL_ARRAY_BUFFER, vertices.size()*sizeof(float), &vertices.front(),GL_STATIC_DRAW);
 
     // set vertex attrib pointer 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,sizeof(float)*5, (void*)0);
-    glVertexAttribPointer(1,2,GL_FLOAT,GL_FALSE,sizeof(float)*5,(void*)(sizeof(float)*3));
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,sizeof(float)*8, (void*)0);
+    glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,sizeof(float)*8,(void*)(sizeof(float)*3));
+    glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE, sizeof(float)*8,(void*)(sizeof(float)*6));
+
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
+    glEnableVertexAttribArray(2);
 
 
     // create shader object 
@@ -85,8 +88,8 @@ bool Engine::start(const char* vshader_path, const char* fshader_path ,const cha
     }
 
     // create texture instance -> texture will be bound inside constructor
-    m_texture1 = new Texture("../shaders/side.jpg");
-    m_texture2 = new Texture("../shaders/minecraft-person1-face.jpg");
+    // m_texture1 = new Texture("../shaders/side.jpg");
+    // m_texture2 = new Texture("../shaders/minecraft-person1-face.jpg");
 
     m_shader_program->use();
     model_location = glGetUniformLocation(m_shader_program->ID, "model");
@@ -96,7 +99,6 @@ bool Engine::start(const char* vshader_path, const char* fshader_path ,const cha
     projection =  glm::perspective(glm::radians(45.0f), static_cast<float>(m_width / m_height), 0.1f, 100.0f);
     glUniformMatrix4fv(projection_location, 1, GL_FALSE, glm::value_ptr(projection));
     
-    */
     return true;
 }
 

@@ -6,6 +6,7 @@
 float aspectRatio = 0;
 std::array<object , 10> rects{};
 
+
 class Application : public Engine{
 public:
     Application():Engine(){};
@@ -20,6 +21,12 @@ public:
     glUniform3fv(viewPos,1,glm::value_ptr(Engine::cameraPos));
     view = glm::lookAt(Engine::cameraPos, Engine::cameraPos + Engine::cameraFront, Engine::cameraUp);
     glUniformMatrix4fv(view_location, 1, GL_FALSE, glm::value_ptr(view));
+
+    // glActiveTexture(GL_TEXTURE0);
+
+    // glBindTexture(GL_TEXTURE_2D, rects[0].getTexture()->getID());
+    // rects[0].getShader()->setInt("material.diffuse",0);
+
     glBindVertexArray(VAO);
 
     // Drawing 
@@ -36,13 +43,9 @@ for(int i=0;i<10;i++){
     // glBindTexture(GL_TEXTURE_2D, m_texture1->getID());`
     glDrawArrays(GL_TRIANGLES, 0, 36);
 }
-// End of drawing
-
-
     glfwSwapBuffers(window);
     glfwPollEvents();
     
-
 }
 
     void config() {
@@ -52,19 +55,14 @@ for(int i=0;i<10;i++){
         glBindVertexArray(lightVAO);
 
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(0*sizeof(float)));
+        glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(0*sizeof(float)));
         glEnableVertexAttribArray(0);
 
+        // load light map with Texture class
+
         rects[0].getShader()->use();
-        uint32_t objColor,lightColor;
-        objColor = glGetUniformLocation(rects[0].getShader()->ID, "objectColor");
-        lightColor= glGetUniformLocation(rects[0].getShader()->ID, "lightColor");
-
-        glUniform3fv(objColor,1, glm::value_ptr(glm::vec3(1.0f, 0.5f, 0.31f)));
-        glUniform3fv(lightColor,1, glm::value_ptr(glm::vec3(1.0f)));
-
-        rects[0].getShader()->setVec3("material.ambient", 0.8f, 0.5f, 0.31f);
-        rects[0].getShader()->setVec3("material.diffuse",0.8f, 0.5f, 0.31f);
+        // rects[0].getShader()->setVec3("material.ambient", 0.8f, 0.5f, 0.31f);
+        // rects[0].getShader()->setVec3("material.diffuse",0.8f, 0.5f, 0.31f);
         rects[0].getShader()->setVec3("material.specular", 0.5f, 0.5f, 0.5f);
         rects[0].getShader()->setFloat("material.shininess", 64.0f);
 
@@ -90,37 +88,27 @@ for(int i=0;i<10;i++){
         glBufferData(GL_ARRAY_BUFFER, vertices.size()*sizeof(float), &vertices.front(),GL_STATIC_DRAW);
 
         // set vertex attrib pointer 
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,sizeof(float)*6, (void*)0);
-        glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,sizeof(float)*6,(void*)(sizeof(float)*3));
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,sizeof(float)*8, (void*)0);
+        glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,sizeof(float)*8,(void*)(sizeof(float)*3));
+        glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE, sizeof(float)*8,(void*)(sizeof(float)*6));
+
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
+        glEnableVertexAttribArray(2);
+        // glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,sizeof(float)*8,(void*)(sizeof(float)*3));
+        // glEnableVertexAttribArray(1);
 
         rects[0].setShaderProgram(vshader_path, fshader_path);
         // rects[0].setTexture(texture_path);
         
-
-        // m_shader_program = new shader(
-        //     vshader_path ? vshader_path : "../shaders/vertexshader.txt",
-        //     fshader_path ? fshader_path : "../shaders/fragmentshader.txt"
-        //     );
-        // uint32_t shader_link =  m_shader_program->createProgram();
-        // if (!shader_link){
-        //     std::cout<<" ERROR OCCURED IN CREATION OF SHADER PROGRAM "<<std::endl;
-        //     return false;
-        // }
-
-        // // create texture instance -> texture will be bound inside constructor
-        // m_texture1 = new Texture("../shaders/side.jpg");
-        // m_texture2 = new Texture("../shaders/minecraft-person1-face.jpg");
-
         rects[0].getShader()->use();
-        // m_shader_program->use();
         model_location = glGetUniformLocation(rects[0].getShader()->ID, "model");
         view_location = glGetUniformLocation(rects[0].getShader()->ID, "view");
         projection_location = glGetUniformLocation(rects[0].getShader()->ID, "projection");
-        // uint32_t light_location;
-        // light_location = glGetUniformLocation(m_shader_program->ID, "lightPos");
-        // glUniform3fv(light_location, 1, glm::value_ptr(glm::vec3(1.0f, 0.5f, 5.0f)));
+        // rects[0].setTexture("../shaders/woodencontainer.png");
+        // rects[0].getShader()->setInt("material.diffuse", 0);
+
+
 
         projection =  glm::perspective(glm::radians(45.0f), static_cast<float>(m_width / m_height), 0.1f, 100.0f);
         glUniformMatrix4fv(projection_location, 1, GL_FALSE, glm::value_ptr(projection));
@@ -178,18 +166,15 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos){
 }
 
 
-
-
 int main(){
 
     Application *app = new Application{};
 
-    for(int i =0;i<rects.size();i++)
-    {
+    for(int i=0;i<10;i++)
         rects[i].setPosition(app->cubePositions[i]);
-    }
 
-    app->start(nullptr,"../shaders/lightingFragmentShader.txt",nullptr);
+
+    app->start("../shaders/lightmapvertexshader.vs","../shaders/lightmapfragmentshader.fs",nullptr);
     app->config();
     std::cout<<"DEBUG TEST FOR SEGMENTATION FAULT"<<std::endl;
     aspectRatio = (float)app->Width() / app->Height();
@@ -218,6 +203,17 @@ int main(){
     r = (float)90 / 255;
     g = (float)80 / 255;
     b = (float)199 / 255;
+
+    rects[0].getShader()->use();
+    Texture mytexture{"../shaders/minecraft.jpg", 0};
+    Texture LightMap{"../shaders/minecraft-lightmap.jpg", 1};
+
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, mytexture.getID());
+    rects[0].getShader()->setInt("myTexture",0);
+    rects[0].getShader()->setInt("material.specualr",1);
+
     
 
     while (!glfwWindowShouldClose(app->window) && glfwGetKey(app->window,GLFW_KEY_ESCAPE) != GLFW_PRESS)
@@ -227,8 +223,8 @@ int main(){
         float currentFrame = glfwGetTime();
         app->deltaTime = currentFrame - app->lastFrame;
         app->lastFrame = currentFrame;     
-        std::cout<<1.0f / app->deltaTime<<" FPS"<<std::endl;    
         app->processInput();    
+        std::cout<<"FPS :" <<1.0f/app->deltaTime<<std::endl;
 
         view = glm::lookAt(Engine::cameraPos, Engine::cameraPos + Engine::cameraFront, Engine::cameraUp);
         lightshader.use();
@@ -240,6 +236,15 @@ int main(){
         glUniformMatrix4fv(model_l,1,GL_FALSE,glm::value_ptr(model));
         
         glDrawArrays(GL_TRIANGLES,0,36);
+        
+        rects[0].getShader()->use();
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, mytexture.getID());
+        rects[0].getShader()->setInt("myTexture",0);
+
+        glActiveTexture(GL_TEXTURE0 + 1);
+        glBindTexture(GL_TEXTURE_2D, LightMap.getID());
+        rects[0].getShader()->setInt("material.specular",1);
 
         app->run();
 
