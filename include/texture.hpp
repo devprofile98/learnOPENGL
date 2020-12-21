@@ -6,6 +6,7 @@
 #include "glad/glad.h"
 
 
+
 class Texture{
 public:
     // load image, gentexture buffer, bound the texture, generate texture and it's mipmap, free the image data
